@@ -1,65 +1,75 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from "next/head";
+import Image from "next/image";
 
-import styles from '@/pages/index.module.css'
+import styles from "@/pages/index.module.css";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "context";
+import Calendar from "react-calendar";
+import {
+  FETCH_TIME_SLOTS,
+  PICK_DATE,
+  SET_ERROR,
+  SET_LOADING,
+} from "ActionTypes";
+import axios from "axios";
+import styled from "styled-components";
+import fetchTimeSlots from "utils/fetchTimeSlots";
+import TimeSlotsList from "@/components/TimeSlotsList";
+
+const CFHeader = styled.h1`
+  text-align: center;
+  margin: 0;
+  padding: 2rem;
+`;
+
+const OuterContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  // background: teal;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+`;
 
 export default function Home() {
+  const { state, dispatch } = useContext(AppContext);
+
+  const [value, setValue] = useState(new Date());
+  const [clicked, setClicked] = useState(true); //change to false later
+
+  useEffect(() => {
+    let date = value?.toDateString();
+    dispatch({
+      type: PICK_DATE,
+      payload: date,
+    });
+    fetchTimeSlots(date, dispatch);
+  }, [value]);
+
+  console.log(state);
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <OuterContainer>
+      <CFHeader>CF Calendar</CFHeader>
+      <Container>
+        <Calendar
+          onChange={() => {
+            setValue;
+            // console.log(value.getDate());
+          }}
+          onClickDay={(e) => {
+            // console.log(e.getDate());
+            setValue(e);
+            setClicked(true);
+          }}
+          value={value}
+        />
 
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a href="https://vercel.com/new" className={styles.card}>
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
-  )
+        {clicked && <TimeSlotsList timeSlots={state.timeSlots} />}
+      </Container>
+    </OuterContainer>
+  );
 }

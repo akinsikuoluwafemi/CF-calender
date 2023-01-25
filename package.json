@@ -8,9 +8,14 @@
     "test:ci": "jest --ci"
   },
   "dependencies": {
+    "@types/react-calendar": "^3.9.0",
+    "@types/styled-components": "^5.1.26",
+    "axios": "^1.2.4",
     "next": "latest",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-calendar": "^4.0.0",
+    "react-dom": "^18.1.0",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.4",
