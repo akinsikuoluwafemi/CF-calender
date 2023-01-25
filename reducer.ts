@@ -1,5 +1,5 @@
 import {
-    ADD_APPOINTMENT,
+  ADD_APPOINTMENT,
   FETCH_TIME_SLOTS,
   PICK_DATE,
   SET_APPOINTMENT_NOTE,
@@ -7,8 +7,8 @@ import {
   SET_LOADING,
   SET_SELECTED_TIME_SLOT,
   SHOW_ALERT,
-} from "ActionTypes";
-import { Action, State } from "globalTypes";
+} from 'ActionTypes';
+import { Action, State } from 'globalTypes';
 
 const reducer = (state: State, action: Action) => {
   if (action.type === PICK_DATE) {
@@ -32,8 +32,11 @@ const reducer = (state: State, action: Action) => {
   if (action.type === SHOW_ALERT) {
     return { ...state, showSubmissionAlert: action.payload };
   }
-  if(action.type === ADD_APPOINTMENT){
-    return {...state, allAppointments: [...state.allAppointments, action.payload]}
+  if (action.type === ADD_APPOINTMENT) {
+    return {
+      ...state,
+      allAppointments: [...state.allAppointments, action.payload],
+    };
   }
 };
 

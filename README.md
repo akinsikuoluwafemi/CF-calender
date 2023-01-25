@@ -1,29 +1,61 @@
 # Next.js + Jest
 
-This example shows how to configure Jest to work with Next.js.
+A simple calendar app that allows students to fetch their mentors availability from an API and select a time slot from the available time.
 
-This includes Next.js' built-in support for Global CSS, CSS Modules and TypeScript.
+## Features
 
-## How to Use
+- Fetch mentors availability from an API
+- Display the calendar with the available time slots
+- Allow the user to select a time slot
+- Prevent the user from selecting the same time slot again
+- Display an error message when there's an error
+- Accessible for screen readers and other accessibility tools
+- Responsive design
 
-Quickly get started using [Create Next App](https://github.com/vercel/next.js/tree/canary/packages/create-next-app#readme)!
+## Tech stack
 
-In your terminal, run the following command:
+- React
+- Typescript
+- Next.js
+- ESlint
+- Jest
+  React Testing library
+- Prettier
+
+## Installation
+
+1: Clone the repository
 
 ```bash
-npx create-next-app --example with-jest with-jest-app
+git clone
 ```
 
+2: Instal dependencies
+
 ```bash
-yarn create next-app --example with-jest with-jest-app
+yarn or npm install
 ```
 
+3: Start the development server
+
 ```bash
-pnpm create next-app --example with-jest with-jest-app
+yarn dev or npm run dev
 ```
 
-## Run Jest Tests
+4: Testing
 
 ```bash
-npm test
+yarn test
+```
+
+5: Linting
+
+```bash
+yarn lint or npm run lint
+```
+
+6: Building
+
+```bash
+yarn build or npm run build
 ```

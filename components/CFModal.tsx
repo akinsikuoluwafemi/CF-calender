@@ -1,10 +1,10 @@
-import React, { FC, useContext, useState } from "react";
-import { Button, Modal, Input, Alert, Space } from "antd";
-import styled from "styled-components";
-import { AppContext } from "context";
-import changeTime, { convertTimeToStr } from "utils/convertTime";
-import { SET_SELECTED_TIME_SLOT, SHOW_ALERT } from "ActionTypes";
-import { useRouter } from "next/router";
+import React, { FC, useContext, useState } from 'react';
+import { Button, Modal, Input, Alert, Space } from 'antd';
+import styled from 'styled-components';
+import { AppContext } from 'context';
+import changeTime, { convertTimeToStr } from 'utils/convertTime';
+import { SET_SELECTED_TIME_SLOT, SHOW_ALERT } from 'ActionTypes';
+import { useRouter } from 'next/router';
 
 const AppointmentNotes = styled.textarea`
   width: 100%;
@@ -32,7 +32,7 @@ const CFModal: FC<CFModalProps> = ({
   const { state, dispatch } = useContext(AppContext);
   const router = useRouter();
 
-  const [appointmentNotes, setAppointmentsNotes] = useState<string>("");
+  const [appointmentNotes, setAppointmentsNotes] = useState<string>('');
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -67,8 +67,8 @@ const CFModal: FC<CFModalProps> = ({
     handleSubmit();
     setSelected(false);
 
-    setAppointmentsNotes("");
-    router.push("/");
+    setAppointmentsNotes('');
+    router.push('/');
 
     setTimeout(() => {
       dispatch({

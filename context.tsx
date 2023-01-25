@@ -1,23 +1,23 @@
-import { Action, State } from "globalTypes";
+import { Action, State } from 'globalTypes';
 import React, {
   useReducer,
   createContext,
   Dispatch,
   FC,
   ReactNode,
-} from "react";
-import reducer from "./reducer";
+} from 'react';
+import reducer from './reducer';
 
 const initialState: State = {
   loading: false,
-  error: "",
-  clickedDate: "",
+  error: '',
+  clickedDate: '',
   timeSlots: [],
   selectedTimeSlot: {
     date_time: null,
-    date: "",
-    time: "",
-    appointmentNotes: "",
+    date: '',
+    time: '',
+    appointmentNotes: '',
   },
 
   allAppointments: [],

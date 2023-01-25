@@ -1,8 +1,8 @@
-import { AppContext } from "context";
-import { TimeSlots } from "globalTypes";
-import React, { FC, useContext } from "react";
-import styled from "styled-components";
-import TimeSlotItem from "./TimeSlotItem";
+import { AppContext } from 'context';
+import { TimeSlots } from 'globalTypes';
+import React, { FC, useContext } from 'react';
+import styled from 'styled-components';
+import TimeSlotItem from './TimeSlotItem';
 
 const TimeDisplay = styled.span`
   font-size: 1rem;
@@ -40,7 +40,7 @@ const TimeSlotsList: FC<TimeSlotListProps> = ({ timeSlots }) => {
   return (
     <TimeSlotContainer>
       <TimeDisplay>
-        {state.clickedDate ? state.clickedDate : "No date selected"}
+        {state.clickedDate ? state.clickedDate : 'No date selected'}
       </TimeDisplay>
       <TimeSlotWrapper>
         {timeSlots.length === 0 && <p>No session(s) available</p>}

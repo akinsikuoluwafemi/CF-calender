@@ -6,14 +6,24 @@
     "start": "next start",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write '**/*.{ts,tsx}'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format"
+    }
   },
   "dependencies": {
     "@types/react-calendar": "^3.9.0",
     "@types/styled-components": "^5.1.26",
     "antd": "^5.1.6",
     "axios": "^1.2.4",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
     "next": "latest",
+    "prettier": "^2.8.3",
     "react": "^18.1.0",
     "react-calendar": "^4.0.0",
     "react-dom": "^18.1.0",

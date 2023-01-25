@@ -1,20 +1,17 @@
-import Head from "next/head";
-import Image from "next/image";
+import Head from 'next/head';
+import Image from 'next/image';
 
-import styles from "@/pages/index.module.css";
-import { useContext, useEffect, useState } from "react";
-import { AppContext } from "context";
-import Calendar from "react-calendar";
-import {
-  PICK_DATE,
-  SHOW_ALERT,
-} from "ActionTypes";
-import { Alert } from "antd";
+import styles from '@/pages/index.module.css';
+import { useContext, useEffect, useState } from 'react';
+import { AppContext } from 'context';
+import Calendar from 'react-calendar';
+import { PICK_DATE, SHOW_ALERT } from 'ActionTypes';
+import { Alert } from 'antd';
 
-import styled from "styled-components";
-import fetchTimeSlots from "utils/fetchTimeSlots";
-import TimeSlotsList from "@/components/TimeSlotsList";
-import { useRouter } from "next/router";
+import styled from 'styled-components';
+import fetchTimeSlots from 'utils/fetchTimeSlots';
+import TimeSlotsList from '@/components/TimeSlotsList';
+import { useRouter } from 'next/router';
 
 const CFHeader = styled.h1`
   text-align: center;
@@ -76,7 +73,7 @@ export default function Home() {
         payload: date,
       });
     fetchTimeSlots(date, dispatch);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   // console.log(state);
@@ -114,10 +111,11 @@ export default function Home() {
           onChange={() => {
             setValue;
           }}
-          onClickDay={(e) => {s
+          onClickDay={(e) => {
+            
             setValue(e);
             setClicked(true);
-            router.push("/");
+            router.push('/');
           }}
           value={value}
         />

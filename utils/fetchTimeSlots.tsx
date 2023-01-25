@@ -1,9 +1,9 @@
-import { FETCH_TIME_SLOTS, SET_ERROR, SET_LOADING } from "ActionTypes";
-import axios from "axios";
-import { Dispatch } from "react";
+import { FETCH_TIME_SLOTS, SET_ERROR, SET_LOADING } from 'ActionTypes';
+import axios from 'axios';
+import { Dispatch } from 'react';
 
 const url =
-  "https://private-37dacc-cfcalendar.apiary-mock.com/mentors/1/agenda";
+  'https://private-37dacc-cfcalendar.apiary-mock.com/mentors/1/agenda';
 
 async function fetchTimeSlots(date: string, dispatch: Dispatch<any>) {
   try {

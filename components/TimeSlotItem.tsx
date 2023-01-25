@@ -1,10 +1,10 @@
-import { SET_SELECTED_TIME_SLOT } from "ActionTypes";
-import { AppContext } from "context";
-import React, { FC, useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import changeTime from "utils/convertTime";
-import { useRouter } from "next/router";
-import CFModal from "./CFModal";
+import { SET_SELECTED_TIME_SLOT } from 'ActionTypes';
+import { AppContext } from 'context';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import changeTime from 'utils/convertTime';
+import { useRouter } from 'next/router';
+import CFModal from './CFModal';
 
 const TimeSlotDisplaySlot = styled.p<{ selected: boolean }>`
   background: #fff;
@@ -13,7 +13,7 @@ const TimeSlotDisplaySlot = styled.p<{ selected: boolean }>`
   font-size: 1rem;
   margin: 1rem;
   padding: 1rem;
-  border: ${(props) => (props.selected ? "3px solid green" : "1px solid #000")};
+  border: ${(props) => (props.selected ? '3px solid green' : '1px solid #000')};
   border-radius: 5px;
   cursor: pointer;
 `;
@@ -50,8 +50,8 @@ const TimeSlotItem: FC<TimeSlotItemProps> = ({
 
     router.push(
       `?&date_time=${time}&year=${year}&month=${month}&day=${day}&time=${changeTime(
-        time
-      )}`
+        time,
+      )}`,
     );
   };
 
