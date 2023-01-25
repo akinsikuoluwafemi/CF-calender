@@ -6,15 +6,15 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "context";
 import Calendar from "react-calendar";
 import {
-  FETCH_TIME_SLOTS,
   PICK_DATE,
-  SET_ERROR,
-  SET_LOADING,
+  SHOW_ALERT,
 } from "ActionTypes";
-import axios from "axios";
+import { Alert } from "antd";
+
 import styled from "styled-components";
 import fetchTimeSlots from "utils/fetchTimeSlots";
 import TimeSlotsList from "@/components/TimeSlotsList";
+import { useRouter } from "next/router";
 
 const CFHeader = styled.h1`
   text-align: center;
@@ -26,6 +26,7 @@ const OuterContainer = styled.div`
   height: 100vh;
   width: 100vw;
   // background: teal;
+  position: relative;
 `;
 
 const Container = styled.div`
@@ -34,36 +35,88 @@ const Container = styled.div`
   align-items: start;
 `;
 
+const AlertWrapper = styled.div`
+  // margin: 0 auto;
+  padding: 1rem;
+  width: 40%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  // height: 10%;
+`;
+
+const AlertDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin: 0;
+  }
+`;
+
 export default function Home() {
   const { state, dispatch } = useContext(AppContext);
+  const router = useRouter();
+
+  const showAlert = state?.showSubmissionAlert;
+
+  const { appointmentNotes, date, time } = state?.selectedTimeSlot;
 
   const [value, setValue] = useState(new Date());
-  const [clicked, setClicked] = useState(true); //change to false later
+  const [clicked, setClicked] = useState(false); //change to false later
+
+  // console.log(state.selectedTimeSlot);
 
   useEffect(() => {
     let date = value?.toDateString();
-    dispatch({
-      type: PICK_DATE,
-      payload: date,
-    });
+
+    clicked &&
+      dispatch({
+        type: PICK_DATE,
+        payload: date,
+      });
     fetchTimeSlots(date, dispatch);
   }, [value]);
 
-  console.log(state);
+  // console.log(state);
 
   return (
     <OuterContainer>
       <CFHeader>CF Calendar</CFHeader>
+
+      {showAlert && (
+        <AlertWrapper>
+          <Alert
+            message="Success Text"
+            description={
+              <AlertDescription>
+                <p>Your Call is scheduled for {date}</p>
+                <p>Time: {time}</p>
+                <p>Notes: {appointmentNotes}</p>
+              </AlertDescription>
+            }
+            type="success"
+            closable
+            afterClose={() => {
+              // dispatch here
+              dispatch({
+                type: SHOW_ALERT,
+                payload: false,
+              });
+            }}
+          />
+        </AlertWrapper>
+      )}
+
       <Container>
         <Calendar
           onChange={() => {
             setValue;
-            // console.log(value.getDate());
           }}
           onClickDay={(e) => {
-            // console.log(e.getDate());
             setValue(e);
             setClicked(true);
+            router.push("/");
           }}
           value={value}
         />

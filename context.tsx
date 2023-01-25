@@ -13,9 +13,15 @@ const initialState: State = {
   error: "",
   clickedDate: "",
   timeSlots: [],
-  selectedTimeSlot: null,
-  appointmentReason: "",
-  appointmentNotes: "",
+  selectedTimeSlot: {
+    date_time: null,
+    date: "",
+    time: "",
+    appointmentNotes: "",
+  },
+
+  allAppointments: [],
+  showSubmissionAlert: false,
 };
 
 const AppContext = createContext<{ state: State; dispatch: Dispatch<Action> }>({
