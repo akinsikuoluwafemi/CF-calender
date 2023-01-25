@@ -76,6 +76,7 @@ export default function Home() {
         payload: date,
       });
     fetchTimeSlots(date, dispatch);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   // console.log(state);
@@ -113,7 +114,7 @@ export default function Home() {
           onChange={() => {
             setValue;
           }}
-          onClickDay={(e) => {
+          onClickDay={(e) => {s
             setValue(e);
             setClicked(true);
             router.push("/");

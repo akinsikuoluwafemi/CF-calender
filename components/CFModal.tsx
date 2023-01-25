@@ -70,7 +70,6 @@ const CFModal: FC<CFModalProps> = ({
     setAppointmentsNotes("");
     router.push("/");
 
-    
     setTimeout(() => {
       dispatch({
         type: SHOW_ALERT,
@@ -87,6 +86,7 @@ const CFModal: FC<CFModalProps> = ({
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
+          // eslint-disable-next-line react/jsx-key
           <Button type="primary" onClick={handleOk}>
             Confirm Call
           </Button>,
