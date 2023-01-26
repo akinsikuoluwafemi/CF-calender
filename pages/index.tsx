@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import fetchTimeSlots from 'utils/fetchTimeSlots';
 import TimeSlotsList from '@/components/TimeSlotsList';
 import { useRouter } from 'next/router';
+import Calender from '@/components/Calender';
 
 const CFHeader = styled.h1`
   text-align: center;
@@ -107,17 +108,11 @@ export default function Home() {
       )}
 
       <Container>
-        <Calendar
-          onChange={() => {
-            setValue;
-          }}
-          onClickDay={(e) => {
-            
-            setValue(e);
-            setClicked(true);
-            router.push('/');
-          }}
+        <Calender
           value={value}
+          setValue={setValue}
+          clicked={clicked}
+          setClicked={setClicked}
         />
 
         {clicked && <TimeSlotsList timeSlots={state.timeSlots} />}

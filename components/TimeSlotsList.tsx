@@ -2,6 +2,7 @@ import { AppContext } from 'context';
 import { TimeSlots } from 'globalTypes';
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
+import changeTime from 'utils/convertTime';
 import TimeSlotItem from './TimeSlotItem';
 
 const TimeDisplay = styled.span`
@@ -30,6 +31,7 @@ interface TimeSlotListProps {
 const TimeSlotsList: FC<TimeSlotListProps> = ({ timeSlots }) => {
   //   console.log(timeSlots);
   const { state, dispatch } = useContext(AppContext);
+  const { loading, error } = state;
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleClick = (index: number) => {
@@ -45,17 +47,25 @@ const TimeSlotsList: FC<TimeSlotListProps> = ({ timeSlots }) => {
       <TimeSlotWrapper>
         {timeSlots.length === 0 && <p>No session(s) available</p>}
 
-        {timeSlots.map((time: { date_time: Date }, index: number) => {
-          return (
-            <TimeSlotItem
-              key={time?.date_time}
-              time={time.date_time}
-              index={index}
-              handleClick={handleClick}
-              selectedIndex={selectedIndex}
-            />
-          );
-        })}
+        {loading && <p>Loading...</p>}
+
+        {error ? (
+          <p>{error}</p>
+        ) : (
+          <>
+            {timeSlots.map((time: { date_time: Date }, index: number) => {
+              return (
+                <TimeSlotItem
+                  key={changeTime(time.date_time)}
+                  time={time.date_time}
+                  index={index}
+                  handleClick={handleClick}
+                  selectedIndex={selectedIndex}
+                />
+              );
+            })}
+          </>
+        )}
       </TimeSlotWrapper>
     </TimeSlotContainer>
   );

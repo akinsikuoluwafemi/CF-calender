@@ -3,7 +3,7 @@ export interface TimeSlots {
 }
 
 export interface pickedSlot {
-  date_time: Date | null;
+  date_time: Date | string;
   date: string;
   time: string;
   appointmentNotes: string;

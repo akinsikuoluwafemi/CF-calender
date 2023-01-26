@@ -3,8 +3,14 @@ import { Button, Modal, Input, Alert, Space } from 'antd';
 import styled from 'styled-components';
 import { AppContext } from 'context';
 import changeTime, { convertTimeToStr } from 'utils/convertTime';
-import { SET_SELECTED_TIME_SLOT, SHOW_ALERT } from 'ActionTypes';
+import {
+  ADD_APPOINTMENT,
+  SET_SELECTED_TIME_SLOT,
+  SHOW_ALERT,
+} from 'ActionTypes';
 import { useRouter } from 'next/router';
+import { pickedSlot } from 'globalTypes';
+import checkAppointments from 'utils/checkAppointments';
 
 const AppointmentNotes = styled.textarea`
   width: 100%;
@@ -30,13 +36,32 @@ const CFModal: FC<CFModalProps> = ({
   setSelected,
 }) => {
   const { state, dispatch } = useContext(AppContext);
+
+  const { allAppointments } = state;
+
   const router = useRouter();
 
   const [appointmentNotes, setAppointmentsNotes] = useState<string>('');
 
+  const currentAppointment: pickedSlot = {
+    date_time: time,
+    date: convertTimeToStr(time),
+    time: changeTime(time),
+    appointmentNotes,
+  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
     setSelected(false);
+  };
+
+  const addAppointments = () => {
+    // checkAppointments(allAppointments, currentAppointment);
+
+    dispatch({
+      type: ADD_APPOINTMENT,
+      payload: currentAppointment,
+    });
   };
 
   const handleSubmit = () => {
@@ -46,21 +71,22 @@ const CFModal: FC<CFModalProps> = ({
 
     dispatch({
       type: SET_SELECTED_TIME_SLOT,
-      payload: {
-        date_time: time,
-        date: convertTimeToStr(time),
-        time: changeTime(time),
-        appointmentNotes,
-      },
+      payload: currentAppointment,
     });
 
-    dispatch({
-      type: SHOW_ALERT,
-      payload: true,
-    });
+    // check if appointment already exists
+    if (!checkAppointments(allAppointments, currentAppointment)) {
+      addAppointments();
+
+      dispatch({
+        type: SHOW_ALERT,
+        payload: true,
+      });
+    }
   };
   const handleOk = () => {
     if (appointmentNotes.length === 0) {
+      alert('Pls add a reason for the call 😃');
       return;
     }
     setIsModalOpen(false);
