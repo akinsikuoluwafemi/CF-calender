@@ -1,16 +1,12 @@
 import React, { FC, useContext, useState } from 'react';
-import { Button, Modal, Input, Alert, Space } from 'antd';
+import { Button, Modal } from 'antd';
 import styled from 'styled-components';
-import { AppContext } from 'context';
-import changeTime, { convertTimeToStr } from 'utils/convertTime';
-import {
-  ADD_APPOINTMENT,
-  SET_SELECTED_TIME_SLOT,
-  SHOW_ALERT,
-} from 'ActionTypes';
+import { AppContext } from '../context';
+import changeTime, { convertTimeToStr, isAmOrPm } from '../utils/convertTime';
+import { ActionTypes } from '../ActionTypes';
 import { useRouter } from 'next/router';
-import { pickedSlot } from 'globalTypes';
-import checkAppointments from 'utils/checkAppointments';
+import { pickedSlot } from '../globalTypes';
+import checkAppointments from '../utils/checkAppointments';
 
 const AppointmentNotes = styled.textarea`
   width: 100%;
@@ -46,7 +42,7 @@ const CFModal: FC<CFModalProps> = ({
   const currentAppointment: pickedSlot = {
     date_time: time,
     date: convertTimeToStr(time),
-    time: changeTime(time),
+    time: `${changeTime(time)} ${isAmOrPm(time)}`,
     appointmentNotes,
   };
 
@@ -56,10 +52,8 @@ const CFModal: FC<CFModalProps> = ({
   };
 
   const addAppointments = () => {
-    // checkAppointments(allAppointments, currentAppointment);
-
     dispatch({
-      type: ADD_APPOINTMENT,
+      type: ActionTypes.ADD_APPOINTMENT,
       payload: currentAppointment,
     });
   };
@@ -70,7 +64,7 @@ const CFModal: FC<CFModalProps> = ({
     // dispatch here
 
     dispatch({
-      type: SET_SELECTED_TIME_SLOT,
+      type: ActionTypes.SET_SELECTED_TIME_SLOT,
       payload: currentAppointment,
     });
 
@@ -79,7 +73,7 @@ const CFModal: FC<CFModalProps> = ({
       addAppointments();
 
       dispatch({
-        type: SHOW_ALERT,
+        type: ActionTypes.SHOW_ALERT,
         payload: true,
       });
     }
@@ -98,7 +92,7 @@ const CFModal: FC<CFModalProps> = ({
 
     setTimeout(() => {
       dispatch({
-        type: SHOW_ALERT,
+        type: ActionTypes.SHOW_ALERT,
         payload: false,
       });
     }, 3000);
@@ -112,16 +106,19 @@ const CFModal: FC<CFModalProps> = ({
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
+          0,
           // eslint-disable-next-line react/jsx-key
-          <Button type="primary" onClick={handleOk}>
+        ].map((btn, i) => (
+          <Button key={i} type="primary" onClick={handleOk}>
             Confirm Call
-          </Button>,
-        ]}
+          </Button>
+        ))}
       >
         <form
           onSubmit={(e) => {
             e.preventDefault();
           }}
+          name="reason"
         >
           <label htmlFor="appointmentNote">
             Please share anything that will help prepare for our meeting.

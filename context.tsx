@@ -7,7 +7,7 @@ import React, {
   ReactNode,
   useEffect,
 } from 'react';
-import getLocalStorage from 'utils/getLocalStorage';
+import getLocalStorage from './utils/getLocalStorage';
 import reducer from './reducer';
 
 const initialState: State = {

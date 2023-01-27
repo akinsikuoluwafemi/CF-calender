@@ -1,12 +1,11 @@
-import { SET_SELECTED_TIME_SLOT } from 'ActionTypes';
-import { AppContext } from 'context';
+import { AppContext } from '../context';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import changeTime from 'utils/convertTime';
+import changeTime, { isAmOrPm } from '../utils/convertTime';
 import { useRouter } from 'next/router';
 import CFModal from './CFModal';
 
-const TimeSlotDisplaySlot = styled.p<{ selected: boolean }>`
+const TimeSlotDisplaySlot = styled.button<{ selected: boolean }>`
   background: #fff;
   text-align: center;
   color: #000;
@@ -16,6 +15,7 @@ const TimeSlotDisplaySlot = styled.p<{ selected: boolean }>`
   border: ${(props) => (props.selected ? '3px solid green' : '1px solid #000')};
   border-radius: 5px;
   cursor: pointer;
+  width: -webkit-fill-available;
 `;
 
 interface TimeSlotItemProps {
@@ -58,6 +58,7 @@ const TimeSlotItem: FC<TimeSlotItemProps> = ({
   return (
     <div>
       <TimeSlotDisplaySlot
+        data-testid={`slot-${time}`}
         selected={selected && selectedIndex === index ? true : false}
         onClick={() => {
           handleClick(index);
@@ -66,7 +67,7 @@ const TimeSlotItem: FC<TimeSlotItemProps> = ({
           showModal();
         }}
       >
-        {changeTime(time)}
+        {changeTime(time)} {isAmOrPm(time)}
       </TimeSlotDisplaySlot>
       <CFModal
         isModalOpen={isModalOpen}

@@ -16,3 +16,4 @@ export {
   SHOW_ALERT,
   ADD_APPOINTMENT,
 };
+export * as ActionTypes from './ActionTypes';

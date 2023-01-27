@@ -23,3 +23,10 @@ export interface Action {
   type: string;
   payload?: any;
 }
+
+export interface CalenderProps {
+  value: Date;
+  setValue: (value: Date) => void;
+  clicked: boolean;
+  setClicked: (value: boolean) => void;
+}

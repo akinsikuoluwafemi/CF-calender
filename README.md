@@ -1,4 +1,4 @@
-# Next.js + Jest
+# CF Calender App
 
 A simple calendar app that allows students to fetch their mentors availability from an API and select a time slot from the available time.
 

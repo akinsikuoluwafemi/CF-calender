@@ -1,4 +1,4 @@
-import { FETCH_TIME_SLOTS, SET_ERROR, SET_LOADING } from 'ActionTypes';
+import { ActionTypes } from '../ActionTypes';
 import axios from 'axios';
 import { Dispatch } from 'react';
 
@@ -7,19 +7,19 @@ const url =
 
 async function fetchTimeSlots(date: string, dispatch: Dispatch<any>) {
   try {
-    dispatch({ type: SET_LOADING, payload: true });
+    dispatch({ type: ActionTypes.SET_LOADING, payload: true });
     const response = await axios.get(url);
     const { data } = response;
-    dispatch({ type: SET_LOADING, payload: false });
+    dispatch({ type: ActionTypes.SET_LOADING, payload: false });
 
     const timeSlots = data.calendar.filter((slots: { date_time: Date }) => {
       return new Date(slots.date_time).toDateString() === date;
     });
     // console.log(timeSlots);
-    dispatch({ type: FETCH_TIME_SLOTS, payload: timeSlots });
+    dispatch({ type: ActionTypes.FETCH_TIME_SLOTS, payload: timeSlots });
   } catch (error: any) {
-    dispatch({ type: SET_LOADING, payload: false });
-    dispatch({ type: SET_ERROR, payload: error.message });
+    dispatch({ type: ActionTypes.SET_LOADING, payload: false });
+    dispatch({ type: ActionTypes.SET_ERROR, payload: error.message });
     console.log(error.message);
   }
 }

@@ -1,8 +1,8 @@
-import { AppContext } from 'context';
-import { TimeSlots } from 'globalTypes';
+import { AppContext } from '../context';
+import { TimeSlots } from '../globalTypes';
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
-import changeTime from 'utils/convertTime';
+import changeTime from '../utils/convertTime';
 import TimeSlotItem from './TimeSlotItem';
 
 const TimeDisplay = styled.span`

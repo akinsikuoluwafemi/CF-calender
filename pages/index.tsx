@@ -3,16 +3,15 @@ import Image from 'next/image';
 
 import styles from '@/pages/index.module.css';
 import { useContext, useEffect, useState } from 'react';
-import { AppContext } from 'context';
-import Calendar from 'react-calendar';
-import { PICK_DATE, SHOW_ALERT } from 'ActionTypes';
+import { AppContext } from '../context';
+import { ActionTypes } from '../ActionTypes';
 import { Alert } from 'antd';
 
 import styled from 'styled-components';
-import fetchTimeSlots from 'utils/fetchTimeSlots';
+import fetchTimeSlots from '../utils/fetchTimeSlots';
 import TimeSlotsList from '@/components/TimeSlotsList';
 import { useRouter } from 'next/router';
-import Calender from '@/components/Calender';
+import CFCalender from '@/components/CFCalender';
 
 const CFHeader = styled.h1`
   text-align: center;
@@ -31,6 +30,11 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const AlertWrapper = styled.div`
@@ -56,6 +60,10 @@ export default function Home() {
   const { state, dispatch } = useContext(AppContext);
   const router = useRouter();
 
+  useEffect(() => {
+    router.push('/');
+  }, []);
+
   const showAlert = state?.showSubmissionAlert;
 
   const { appointmentNotes, date, time } = state?.selectedTimeSlot;
@@ -70,7 +78,7 @@ export default function Home() {
 
     clicked &&
       dispatch({
-        type: PICK_DATE,
+        type: ActionTypes.PICK_DATE,
         payload: date,
       });
     fetchTimeSlots(date, dispatch);
@@ -99,7 +107,7 @@ export default function Home() {
             afterClose={() => {
               // dispatch here
               dispatch({
-                type: SHOW_ALERT,
+                type: ActionTypes.SHOW_ALERT,
                 payload: false,
               });
             }}
@@ -108,7 +116,7 @@ export default function Home() {
       )}
 
       <Container>
-        <Calender
+        <CFCalender
           value={value}
           setValue={setValue}
           clicked={clicked}
