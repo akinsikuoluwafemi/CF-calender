@@ -13,7 +13,7 @@ export interface State {
   loading: boolean;
   error: string;
   clickedDate: string;
-  timeSlots: TimeSlots[]; //change this later
+  timeSlots: TimeSlots[];
   selectedTimeSlot: pickedSlot;
   showSubmissionAlert: boolean;
   allAppointments: pickedSlot[];
