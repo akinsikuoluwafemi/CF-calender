@@ -1,7 +1,5 @@
 import TimeSlotItem from '@/components/TimeSlotItem';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { pickedSlot } from 'globalTypes';
-import mockRouter from 'next-router-mock';
 
 jest.mock('next/router', () => require('next-router-mock'));
 

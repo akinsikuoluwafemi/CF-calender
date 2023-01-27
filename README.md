@@ -119,4 +119,6 @@ yarn build or npm run build
 
 7: I also wrote a few robust test cases that mocks the way the user uses the app.
 
+8: I am also using styled components for styling.
+
 # Thank You
