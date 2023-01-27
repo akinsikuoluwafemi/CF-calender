@@ -2,7 +2,7 @@
 
 A simple calendar app that allows students to fetch their mentors availability from an API and select a time slot from the available time.
 
-[Link to App](https://cf-calender-6or3oz86y-akinsikuoluwafemi.vercel.app/)
+[Link to App](https://cf-calender.vercel.app/)
 
 ## Features
 
