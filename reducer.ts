@@ -28,6 +28,8 @@ const reducer = (state: State, action: Action) => {
       ...state,
       allAppointments: [...state.allAppointments, action.payload],
     };
+  } else {
+    return state;
   }
 };
 

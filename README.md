@@ -27,7 +27,7 @@ A simple calendar app that allows students to fetch their mentors availability f
 1: Clone the repository
 
 ```bash
-git clone
+git clone git@github.com:akinsikuoluwafemi/CF-calender.git
 ```
 
 2: Instal dependencies

@@ -10,7 +10,7 @@ import React, {
 import getLocalStorage from './utils/getLocalStorage';
 import reducer from './reducer';
 
-const initialState: State = {
+const initialState = {
   loading: false,
   error: '',
   clickedDate: '',
