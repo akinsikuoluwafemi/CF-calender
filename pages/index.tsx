@@ -70,22 +70,6 @@ export default function Home() {
   const [value, setValue] = useState(new Date());
   const [clicked, setClicked] = useState(false); //change to false later
 
-  // console.log(state.selectedTimeSlot);
-
-  useEffect(() => {
-    let date = value?.toDateString();
-
-    clicked &&
-      dispatch({
-        type: ActionTypes.PICK_DATE,
-        payload: date,
-      });
-    fetchTimeSlots(date, dispatch);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
-
-  // console.log(state);
-
   return (
     <OuterContainer>
       <CFHeader>CF Calendar</CFHeader>

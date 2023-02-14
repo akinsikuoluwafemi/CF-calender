@@ -31,7 +31,7 @@ const TimeSlotItem: FC<TimeSlotItemProps> = ({
   handleClick,
   selectedIndex,
 }) => {
-  const { state, dispatch } = useContext(AppContext);
+  // const { state, dispatch } = useContext(AppContext);
 
   const router = useRouter();
 
